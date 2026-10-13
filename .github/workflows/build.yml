@@ -31,23 +31,28 @@ jobs:
           echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
           echo "KEYSTORE_FILE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
 
-      - name: Build release APK
+      - name: Build release APK and App Bundle
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleRelease bundleRelease --no-daemon
           cp app/build/outputs/apk/release/app-release.apk ParadiseFLAC.apk
+          cp app/build/outputs/bundle/release/app-release.aab ParadiseFLAC.aab
 
       - uses: actions/upload-artifact@v4
         with:
           name: ParadiseFLAC
-          path: ParadiseFLAC.apk
+          path: |
+            ParadiseFLAC.apk
+            ParadiseFLAC.aab
 
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: ParadiseFLAC.apk
+          files: |
+            ParadiseFLAC.apk
+            ParadiseFLAC.aab
           generate_release_notes: true

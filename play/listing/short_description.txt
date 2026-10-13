@@ -1,0 +1,1 @@
+Lossless 44.1 kHz FLAC player for Radio Paradise, with bit-perfect USB output.

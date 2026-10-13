@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A2F55"/><stop offset="1" stop-color="#0E0F14"/></linearGradient></defs>
+  <rect width="1024" height="500" fill="url(#g)"/>
+  <g transform="translate(40,40) scale(3.9)">
+    <path d="M36,56 A18,18 0 0 1 72,56 Z" fill="#FFB547"/>
+    <g fill="none" stroke-width="4" stroke-linecap="round">
+      <path stroke="#FF7A59" d="M32,62 Q38,58 44,62 T56,62 T68,62 T76,62"/>
+      <path stroke="#E85D8C" d="M35,70 Q41,66 47,70 T59,70 T71,70 T73,70"/>
+      <path stroke="#8E7CFF" d="M40,78 Q46,74 52,78 T64,78 T68,78"/>
+    </g>
+  </g>
+  <text x="470" y="230" font-family="Noto Sans, sans-serif" font-size="68" font-weight="700" fill="#FFFFFF">Paradise FLAC</text>
+  <text x="472" y="290" font-family="Noto Sans, sans-serif" font-size="30" fill="#FFFFFF" fill-opacity="0.75">Lossless 44.1 kHz / 16-bit radio</text>
+  <text x="472" y="335" font-family="Noto Sans, sans-serif" font-size="24" fill="#FFFFFF" fill-opacity="0.5">Bit-perfect USB · aptX Lossless ready</text>
+</svg>

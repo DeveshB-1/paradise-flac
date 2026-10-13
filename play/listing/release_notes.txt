@@ -1,0 +1,1 @@
+First release: lossless FLAC streaming, now playing with cover art, background playback, signal-path view and bit-perfect USB output.

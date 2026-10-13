@@ -1,0 +1,17 @@
+Paradise FLAC is a focused, single-station player for Radio Paradise's lossless stream — the commercial-free, DJ-mixed blend of rock, electronica, world music and more — in full CD quality: FLAC, 44.1 kHz / 16-bit.
+
+LOSSLESS, END TO END
+• The FLAC stream is decoded on your phone — no transcoding, no compression in between.
+• Bit-perfect USB (Android 14+): send untouched 44.1 kHz/16-bit audio straight to your USB DAC, bypassing Android's mixer and resampler.
+• Ready for aptX Lossless on Snapdragon Sound phones with compatible earbuds.
+• A live "signal path" card shows exactly what happens to your audio — stream, decoder and output device — and tells you honestly whether that hop is lossless.
+
+MADE FOR LISTENING
+• Now playing: song, artist, album, year and cover art, updated as each track changes.
+• Background playback with notification, lock-screen and Bluetooth/headset controls.
+• Live-radio behaviour: resuming after a pause jumps back to what's on air now.
+• Automatic reconnect if your connection drops.
+
+No accounts, no ads, no tracking.
+
+Paradise FLAC is an unofficial, independent app and is not affiliated with Radio Paradise. Radio Paradise is listener-supported — please consider supporting them at radioparadise.com.
