@@ -1,1 +1,1 @@
-New: an optional tip jar, and a shortcut to support Radio Paradise.
+Fix: status bar icons are now readable on the dark background.
