@@ -12,6 +12,6 @@ MADE FOR LISTENING
 • Live-radio behaviour: resuming after a pause jumps back to what's on air now.
 • Automatic reconnect if your connection drops.
 
-No accounts, no ads, no tracking.
+No accounts, no ads, no tracking. Optional tips keep it going — they unlock nothing, everything is free.
 
 Paradise FLAC is an unofficial, independent app and is not affiliated with Radio Paradise. Radio Paradise is listener-supported — please consider supporting them at radioparadise.com.

@@ -99,11 +99,13 @@ class MainActivity : ComponentActivity() {
     private var controllerFuture: ListenableFuture<MediaController>? = null
     private var controller: MediaController? = null
     private var artworkUri: Uri? = null
+    private lateinit var tipJar: TipJar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         bitPerfectWanted = AudioPath.bitPerfectWanted(this)
+        tipJar = TipJar(this).also { it.start() }
         setContent {
             MaterialTheme(colorScheme = darkColorScheme()) {
                 PlayerScreen(
@@ -113,7 +115,9 @@ class MainActivity : ComponentActivity() {
                     bitPerfectWanted = bitPerfectWanted,
                     onToggle = ::togglePlayback,
                     onBitPerfect = ::setBitPerfect,
-                    onSupport = {
+                    tipJar = tipJar,
+                    onTip = { tipJar.tip(this, it) },
+                    onSupportStation = {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://radioparadise.com/support")))
                     },
                 )
@@ -142,6 +146,11 @@ class MainActivity : ComponentActivity() {
             ui = ui.copy(path = Bundle(c.sessionExtras))
             refresh(c)
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    override fun onDestroy() {
+        tipJar.stop()
+        super.onDestroy()
     }
 
     override fun onStop() {
@@ -231,7 +240,9 @@ private fun PlayerScreen(
     bitPerfectWanted: Boolean,
     onToggle: () -> Unit,
     onBitPerfect: (Boolean) -> Unit,
-    onSupport: () -> Unit,
+    tipJar: TipJar,
+    onTip: (TipJar.Tip) -> Unit,
+    onSupportStation: () -> Unit,
 ) {
     val top by animateColorAsState(tint, tween(900), label = "tint")
     Box(
@@ -311,16 +322,15 @@ private fun PlayerScreen(
             Spacer(Modifier.height(28.dp))
             SignalPath(ui.path, bitPerfectWanted, onBitPerfect)
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(16.dp))
+            SupportCard(tipJar, onTip, onSupportStation)
+
+            Spacer(Modifier.height(16.dp))
             Text(
-                "Unofficial player. Radio Paradise is listener-supported — tap to support them.",
-                color = Color.White.copy(alpha = 0.45f),
+                "Unofficial player · not affiliated with Radio Paradise",
+                color = Color.White.copy(alpha = 0.35f),
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .clickable(onClick = onSupport)
-                    .padding(8.dp),
             )
         }
     }
@@ -504,5 +514,68 @@ private fun PathRow(label: String, value: String, dot: Color) {
         Spacer(Modifier.size(10.dp))
         Text(label, color = Color.White.copy(alpha = 0.55f), fontSize = 14.sp, modifier = Modifier.widthIn(min = 76.dp))
         Text(value, color = Color.White, fontSize = 14.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+@Composable
+private fun SupportCard(tipJar: TipJar, onTip: (TipJar.Tip) -> Unit, onSupportStation: () -> Unit) {
+    Column(
+        Modifier
+            .widthIn(max = 420.dp)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(Color.White.copy(alpha = 0.06f))
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text("SUPPORT", color = Color.White.copy(alpha = 0.5f), fontSize = 11.sp, letterSpacing = 2.sp)
+
+        if (tipJar.status == TipJar.Status.READY) {
+            Text(
+                "Enjoying Paradise FLAC? Leave a tip to keep it going — it unlocks nothing, it's just a thank-you.",
+                color = Color.White.copy(alpha = 0.75f),
+                fontSize = 13.sp,
+                lineHeight = 18.sp,
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                tipJar.tips.forEachIndexed { i, tip ->
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color.White.copy(alpha = if (i == 1) 0.16f else 0.1f))
+                            .clickable { onTip(tip) }
+                            .padding(vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text(listOf("☕", "🍕", "🎧").getOrElse(i) { "💛" }, fontSize = 20.sp)
+                        Spacer(Modifier.height(4.dp))
+                        Text(tip.price, color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    }
+                }
+            }
+            tipJar.message?.let {
+                Text(it, color = Good, fontSize = 13.sp)
+            }
+        }
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .clickable(onClick = onSupportStation)
+                .padding(vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text("Support Radio Paradise", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.Medium)
+                Text(
+                    "The station is ad-free and listener-supported.",
+                    color = Color.White.copy(alpha = 0.55f),
+                    fontSize = 12.sp,
+                )
+            }
+            Text("↗", color = Color.White.copy(alpha = 0.6f), fontSize = 18.sp)
+        }
     }
 }

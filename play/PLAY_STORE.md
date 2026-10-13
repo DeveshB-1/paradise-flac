@@ -15,6 +15,7 @@ Everything in this folder is ready to paste/upload into Play Console.
 | Privacy policy URL | https://deveshb-1.github.io/paradise-flac/privacy.html |
 | Category | Music & Audio |
 | Contains ads | No |
+| In-app purchases | Yes (optional tips) |
 
 ## App content answers
 
@@ -25,6 +26,24 @@ Everything in this folder is ready to paste/upload into Play Console.
 - **Foreground service declaration:** type `mediaPlayback` — "Plays a user-started internet radio stream in the
   background with a media notification." Attach a short screen recording of starting playback and locking the phone.
 - **News app / health / financial / government:** No.
+
+## Tip jar (in-app products)
+
+1. Play Console → **Monetize → Payments profile**: set up the merchant account (free).
+2. Upload an AAB that includes billing (v1.1.0+) to any track first — products can't be created before that.
+3. **Monetize → Products → In-app products** → create three **one-time** products, then *Activate* them:
+
+| Product ID | Name | Suggested price |
+| --- | --- | --- |
+| `tip_small` | Small tip | ₹49 / $0.99 |
+| `tip_medium` | Big tip | ₹149 / $2.99 |
+| `tip_large` | Huge tip | ₹399 / $6.99 |
+
+The app sorts them by price and shows ☕ 🍕 🎧. If the products don't exist yet (or there's no Play Store, e.g. the
+GitHub APK on a de-Googled phone), the tip buttons simply don't appear.
+
+To test without being charged: Play Console → **Settings → License testing** → add your Gmail, then install from
+the internal/closed testing track.
 
 ## Signing
 

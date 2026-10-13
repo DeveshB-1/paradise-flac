@@ -15,6 +15,7 @@ A one-station Android player for **[Radio Paradise](https://radioparadise.com)**
   and the output device (Bluetooth / USB / wired / speaker) with an honest lossless verdict.
 - **Bit-perfect USB** (Android 14+): toggle to hand 44.1 kHz/16-bit PCM straight to a USB DAC,
   bypassing Android's mixer and resampler.
+- **Tip jar** via Google Play billing (optional, unlocks nothing), plus a shortcut to support Radio Paradise.
 - Live-radio behaviour: resuming after a pause jumps back to "now", and dropped connections retry with backoff.
 
 ## About "lossless" on Android
