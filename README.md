@@ -6,6 +6,10 @@ A one-station Android player for **[Radio Paradise](https://radioparadise.com)**
 > Unofficial. Not affiliated with Radio Paradise. They're listener-supported:
 > [radioparadise.com/support](https://radioparadise.com/support).
 
+## Screenshots
+
+<table><tr><td align="center"><img src="play/screenshots/1-playing.png" width="220" alt="Now playing"><br><sub>Now playing</sub></td><td align="center"><img src="play/screenshots/2-next-song.png" width="220" alt="Live track info"><br><sub>Live track info</sub></td></tr></table>
+
 ## Features
 
 - **Lossless stream** decoded on-device with Media3 / ExoPlayer (Ogg FLAC → PCM, no transcoding).
